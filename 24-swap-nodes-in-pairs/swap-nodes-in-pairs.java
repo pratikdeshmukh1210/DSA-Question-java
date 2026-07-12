@@ -1,8 +1,11 @@
-class Solution {
+
+     class Solution {
     public ListNode swapPairs(ListNode head) {
 
         if (head == null || head.next == null)
             return head;
+
+        int size = 2;
 
         ListNode left = head;
         ListNode prevLeft = null;
@@ -10,26 +13,43 @@ class Solution {
 
         while (left != null) {
 
-            ListNode right = left.next;
+            // Find right node
+            ListNode right = left;
+            for (int i = 1; i < size; i++) {
+                if (right == null)
+                    break;
+                right = right.next;
+            }
 
+            // Not enough nodes
             if (right == null) {
                 if (prevLeft != null)
                     prevLeft.next = left;
+                else
+                    res = left;
                 break;
             }
 
             ListNode nextLeft = right.next;
 
-            // Reverse pair
-            right.next = left;
-            left.next = nextLeft;
+            // Reverse current group
+            ListNode curr = left;
+            ListNode prev = nextLeft;
 
-            // Connect previous pair
+            for (int i = 0; i < size; i++) {
+                ListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+
+            // Connect previous group
             if (prevLeft != null)
-                prevLeft.next = right;
+                prevLeft.next = prev;
             else
-                res = right;
+                res = prev;
 
+            // Update pointers
             prevLeft = left;
             left = nextLeft;
         }
