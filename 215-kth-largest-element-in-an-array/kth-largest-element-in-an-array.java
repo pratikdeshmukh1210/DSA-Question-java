@@ -9,6 +9,7 @@ class Solution {
                 pq.poll() ;
                 pq.add(nums[i]) ;
             }
+            
         }
         return pq.peek() ;
     }
