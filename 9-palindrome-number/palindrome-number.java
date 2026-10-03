@@ -1,19 +1,17 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        String s = String.valueOf(x) ;
-        int left = 0 ;
-        int right = s.length()-1 ;
-        boolean isPlaindrome = true ;
-
-        while(left < right){
-            if(s.charAt(left) != s.charAt(right)){
-                isPlaindrome = false ;
-                break ;
-            }
-
-            left++ ;
-            right-- ;
-        }
-     return isPlaindrome ;
-    }
+  int orginal = x;
+  int rev= 0 ;
+ while( x > 0 ){
+  int digit = x % 10 ;
+  rev = rev * 10 + digit ;
+  x = x / 10 ; 
+ }
+if(orginal == rev){
+    return true ;
+}
+else{
+    return false ;
+}
+   }
 }
